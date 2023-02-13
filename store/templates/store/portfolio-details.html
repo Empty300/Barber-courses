@@ -3,7 +3,11 @@
 {% block content %}
 
   <main id="main">
-
+    {% for lesson in lessons_list %}
+        {{ lesson.name }}
+        <video controls="controls" >
+        <source src="{{ lesson.video_file.url }}" type="video/mp4">
+    {% endfor %}
     <!-- ======= Breadcrumbs Section ======= -->
     <section class="breadcrumbs">
       <div class="container">
@@ -20,6 +24,7 @@
       </div>
     </section><!-- Breadcrumbs Section -->
 
+
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
       <div class="container">
@@ -29,10 +34,6 @@
           <div class="col-lg-8">
             <div class="portfolio-details-slider swiper">
               <div class="swiper-wrapper align-items-center">
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-1.jpg" alt="">
-                </div>
 
                 <div class="swiper-slide">
                   <img src="assets/img/portfolio/portfolio-2.jpg" alt="">

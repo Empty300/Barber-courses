@@ -276,9 +276,33 @@
         </section><!-- End Portfolio Section -->
 
         <!-- ======= Contact Section ======= -->
-        <section id="services" class="services">
+        <section id="price" class="services">
             <div class="container">
+                <div id="login" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
 
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <img src="{% static 'img/login.png' %}" alt="Your Image">
+                            </div>
+                            <div class="modal-body">
+                                <h5>Для того, чтобы приобрести курс, вам необходимо зарегистрироваться.</h5>
+                                <form>
+                                    <input type="text" name="username" class="username form-control"
+                                           placeholder="Имя пользователя"/>
+                                    <input type="password" name="password" class="password form-control"
+                                           placeholder="Пароль"/>
+                                    <input type="password" name="password" class="password form-control"
+                                           placeholder="Email"/>
+
+                                    <input class="btn login" type="submit" value="Зарегестрироваться"/>
+
+                                </form>
+                                Уже есть аккаунт?<a href="#"> Войти</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="section-title" data-aos="fade-in" data-aos-delay="100">
                     <h2>Приобрести курс:</h2>
                 </div>
@@ -291,7 +315,7 @@
                             <p class="description">+ Доступ к курсу</p>
                             <p class="description">+ Контакты для закупки инструментов со скидкой</p>
                             <p class="description">+ Обратная связь от преподавателей по итогам прохождения курса</p>
-                            <a href="#" class="about-btn1">Купить курс</a>
+                            <a href="#" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
                         </div>
                     </div>
 
@@ -304,7 +328,7 @@
                             <p class="description">+ Контакты для закупки инструментов со скидкой</p>
                             <p class="description">+ Обратная связь от преподавателей по итогам прохождения курса</p>
                             <p class="description">+ Доступ в общий чат с учениками</p>
-                            <a href="#" class="about-btn1">Купить курс</a>
+                            <a href="#" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
                         </div>
                     </div>
 
@@ -317,9 +341,27 @@
                             <p class="description">+ Контакты для закупки инструментов со скидкой</p>
                             <p class="description">+ Обратная связь от преподавателей по итогам прохождения курса</p>
                             <p class="description">+ Доступ к курсу</p>
-                            <p class="description">+ Возможность проверки каждой работы действующим мастером сети, с указанием ошибок</p>
-
-                            <a href="#" class="about-btn1">Купить курс</a>
+                            <p class="description">+ Возможность проверки каждой работы действующим мастером сети, с
+                                указанием ошибок</p>
+                            <div id="openModal" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Заголовок</h3>
+                                            <a href="#close" title="Close" class="close">×</a>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul>
+                                                <li>Содержание</li>
+                                                <li>Содержание</li>
+                                                <li>Содержание</li>
+                                                <li>Содержание</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
 
 
                         </div>
@@ -329,8 +371,14 @@
                 </div>
 
             </div>
+
         </section>
+
+
 
     </main><!-- End #main -->
 
+
+
 {% endblock content %}
+

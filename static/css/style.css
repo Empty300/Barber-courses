@@ -634,7 +634,7 @@ section {
 .container .about-btn1 {
 
 
-  background: #000000;
+  background: #8d4934;
   padding: 6px 44px 8px 30px;
   color: #fff;
   border-radius: 50px;
@@ -662,7 +662,7 @@ section {
 }
 
 .container .about-btn1:hover {
-  background: #7bbad7;
+  background: #000000;
 }
 
 
@@ -1142,7 +1142,8 @@ section {
 .team{
   background: url("../img/about-bg.jpg") center center no-repeat;
   background-size: cover;
-  padding: 0px 0;
+  padding-top: 10px;
+  padding-bottom: 0px;
   position: relative;
   background: rgba(255, 255, 255, 0.75);
 }
@@ -1512,6 +1513,86 @@ section {
   padding-top: 10px;
   text-align: center;
   font-size: 13px;
+  color: #fff;
+}
+
+/* Стили всплывающего окна по-умолчанию */
+.login-trigger {
+
+  color: #fff;
+  background: linear-gradient(to bottom right, #B05574, #F87E7B);
+  padding: 15px 30px;
+  border-radius: 30px;
+  position: relative;
+  top: 50%;
+}
+
+/*Modal*/
+h4 {
+  font-weight: bold;
+  color: #fff;
+}
+.close {
+  color: #fff;
+  transform: scale(1.2)
+}
+
+.modal-header {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+.modal-header img {
+  width: 100%;
+  height: 100%;
+}
+.modal-content {
+  text-align: center;
+  color: #000000;
+
+
+}
+.form-control {
+  margin: 1em 0;
+}
+.form-control:hover, .form-control:focus {
+  box-shadow: #7a7676;
+  border-color: #7a7676;
+
+}
+.username, .password {
+  border: none;
+  border-radius: 1px;
+  box-shadow: none;
+  border-bottom: 2px solid #eee;
+  padding-left: 0;
+  font-weight: normal;
+  background: transparent;
+}
+.form-control::-webkit-input-placeholder {
+  color: #968686;
+}
+.form-control:focus::-webkit-input-placeholder {
+  font-weight: bold;
+  color: #fff;
+}
+.login {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: none;
+  border: 2px solid rgb(128, 64, 48);
+  color: rgb(128, 64, 48);
+  font-weight: bold;
+  transition: all .5s;
+  margin-top: 1em;
+  margin-bottom: 10px;
+}
+.login:hover {
+  background: rgb(128, 64, 48);
   color: #fff;
 }
 
