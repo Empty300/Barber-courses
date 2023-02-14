@@ -1,9 +1,11 @@
 
-from django.urls import path, include
+from django.urls import path
 
-from store.views import index_page, LessonsListView
+from store.views import LessonsListView, IndexPageView
+
+app_name = 'store'
 
 urlpatterns = [
-    path('', index_page, name='store'),
-    path('lessons/', LessonsListView.as_view(), name='Уроки')
+    path('', IndexPageView.as_view(), name='store'),
+    path('lessons/', LessonsListView.as_view(), name='Уроки'),
 ]

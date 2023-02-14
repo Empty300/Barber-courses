@@ -1,19 +1,21 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 from store.models import Lessons
+from users.forms import UserRegistrationForm
+from users.models import User
 
 
-def index_page(request):
-    return render(request, 'store/index.html')
+class IndexPageView(CreateView):
+    model = User
+    template_name = 'store/index.html'
+    form_class = UserRegistrationForm
 
 
 class LessonsListView(ListView):
     model = Lessons
     template_name = 'store/portfolio-details.html'
-    title = 'Store - Каталог'
 
     def get_queryset(self):
         queryset = Lessons.objects.all()
         return queryset
-
