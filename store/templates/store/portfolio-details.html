@@ -1,76 +1,63 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
-
+<section id="hero">
   <main id="main">
-    {% for lesson in lessons_list %}
-        {{ lesson.name }}
-        <video controls="controls" >
-        <source src="{{ lesson.video_file.url }}" type="video/mp4">
-    {% endfor %}
-    <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="billing-details1">
+                    <div class="form-wrapper">
+                        <h3>Регистрация</h3>
+                        {% if form.errors %}
+                            <div id="errors">
+                                <div class="errors1">
+                                    {{ form.username.errors }}
+                                    {{ form.password2.errors }}
+                                    {{ form.password1.errors }}
+                                    {{ form.first_name.errors }}
+                                    {{ form.last_name.errors }}
+                                    {{ form.email.errors }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <form action="{% url 'users:registration' %}" method="POST">
+                            {% csrf_token %}
+                            {{ form.username }}
+                            {{ form.email }}
+                            {{ form.password1 }}
+                            {{ form.password2 }}
+                            <input class="btn login" type="submit" value="Зарегестрироваться"/>
+                        </form>
 
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Portfolio Details</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li>Portfolio Details</li>
-          </ol>
+                    </div>
+
+                    <div class="form-wrapper">
+                        <h3>Вход</h3>
+                        {% if form.errors %}
+                            <div id="errors">
+                                <div class="errors1">
+                                    {{ form.username.errors }}
+                                    {{ form.password.errors }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            {{ form.username }}
+                            {{ form.password1 }}
+                            <p><a href="">Забыли пароль?</a></p>
+                            <input class="btn login1" type="submit" value="Войти"/>
+                        </form>
+
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
 
-      </div>
-    </section><!-- Breadcrumbs Section -->
-
-
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
-                </div>
-
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="portfolio-info">
-              <h3>Project information</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>
-            <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Details Section -->
+    </div>
 
   </main><!-- End #main -->
-
+</section>
 {% endblock content %}

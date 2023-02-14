@@ -287,18 +287,27 @@
                             </div>
                             <div class="modal-body">
                                 <h5>Для того, чтобы приобрести курс, вам необходимо зарегистрироваться.</h5>
-                                <form>
-                                    <input type="text" name="username" class="username form-control"
-                                           placeholder="Имя пользователя"/>
-                                    <input type="password" name="password" class="password form-control"
-                                           placeholder="Пароль"/>
-                                    <input type="password" name="password" class="password form-control"
-                                           placeholder="Email"/>
-
+                                {% if form.errors %}
+                                    <div id="errors">
+                                        <div class="errors1">
+                                            {{ form.username.errors }}
+                                            {{ form.password2.errors }}
+                                            {{ form.password1.errors }}
+                                            {{ form.first_name.errors }}
+                                            {{ form.last_name.errors }}
+                                            {{ form.email.errors }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <form action="{% url 'users:registration' %}" method="POST">
+                                    {% csrf_token %}
+                                    {{ form.username }}
+                                    {{ form.email }}
+                                    {{ form.password1 }}
+                                    {{ form.password2 }}
                                     <input class="btn login" type="submit" value="Зарегестрироваться"/>
-
                                 </form>
-                                Уже есть аккаунт?<a href="#"> Войти</a>
+                                Уже есть аккаунт?<a href="{% url 'users:login' %}"> Войти</a>
                             </div>
                         </div>
                     </div>

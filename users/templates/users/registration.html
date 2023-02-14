@@ -1,0 +1,46 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+    <section id="hero">
+        <main id="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="billing-details1">
+                            <div class="form-wrapper">
+                                <h3>Регистрация</h3>
+                                {% if form.errors %}
+                                    <div id="errors">
+                                        <div class="errors1">
+                                            {% for error in form.password2.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                            {% for error in form.username.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                            {% for error in form.email.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="form-container">
+                                    <form action="{% url 'users:registration' %}" method="POST">
+                                        {% csrf_token %}
+                                        {{ form.username }}
+                                        {{ form.email }}
+                                        {{ form.password1 }}
+                                        {{ form.password2 }}
+                                        <input class="btn login" type="submit" value="Зарегестрироваться"/>
+                                        <p>Уже есть аккунт? <a href="{% url 'users:login' %}">Войти</a></p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main><!-- End #main -->
+    </section>
+{% endblock content %}
