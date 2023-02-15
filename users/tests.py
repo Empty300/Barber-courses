@@ -106,10 +106,12 @@ class TestDataBase(TestCase):
 
         """Проверка вход, выход"""
 
-        self.client.post(self.path, self.data)
+        response = self.client.post(self.path, self.data)
+        self.assertRedirects(response, reverse('users:login'))
         response = self.client.get(reverse('store:store'))
         self.assertNotContains(response, 'Выйти')
-        self.client.login(username=self.data['username'], password=self.data['password1'])
+        response = self.client.post(reverse('users:login'), {'username': 'testuser', 'password': 'GSDFGdfdfg!1'})
+        self.assertRedirects(response, reverse('users:profile', kwargs={'pk': User.objects.get(username=self.data['username']).pk}))
         response = self.client.get(reverse('store:store'))
         self.assertContains(response, 'Выйти')
 
