@@ -316,78 +316,24 @@
                     <h2>Приобрести курс:</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up">
-                            <div class="icon"><i class="bi bi-basket3"></i></div>
-                            <h4 class="title"><a href="">Пакет "Лайт"</a></h4>
-                            <h4 class="title"><a href="">5 000 Р.</a></h4>
-                            <p class="description">+ Доступ к курсу</p>
-                            <p class="description">+ Контакты для закупки инструментов со скидкой</p>
-                            <p class="description">+ Обратная связь от преподавателей по итогам прохождения курса</p>
-                            <a href="#" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up">
-                            <div class="icon"><i class="bi bi-basket2"></i></div>
-                            <h4 class="title"><a href="">Пакет "Оптимальный"</a></h4>
-                            <h4 class="title"><a href="">10 000 Р.</a></h4>
-                            <p class="description">+ Доступ к курсу</p>
-                            <p class="description">+ Контакты для закупки инструментов со скидкой</p>
-                            <p class="description">+ Обратная связь от преподавателей по итогам прохождения курса</p>
-                            <p class="description">+ Доступ в общий чат с учениками</p>
-                            <a href="#" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box" data-aos="fade-up">
-                            <div class="icon"><i class="bi bi-basket"></i></div>
-                            <h4 class="title"><a href="">Пакет "Полный"</a></h4>
-                            <h4 class="title"><a href="">15 000 Р.</a></h4>
-                            <p class="description">+ Доступ к курсу</p>
-                            <p class="description">+ Контакты для закупки инструментов со скидкой</p>
-                            <p class="description">+ Обратная связь от преподавателей по итогам прохождения курса</p>
-                            <p class="description">+ Доступ к курсу</p>
-                            <p class="description">+ Возможность проверки каждой работы действующим мастером сети, с
-                                указанием ошибок</p>
-                            <div id="openModal" class="modal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3 class="modal-title">Заголовок</h3>
-                                            <a href="#close" title="Close" class="close">×</a>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul>
-                                                <li>Содержание</li>
-                                                <li>Содержание</li>
-                                                <li>Содержание</li>
-                                                <li>Содержание</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                    {% for product in all_products %}
+                        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                            <div class="icon-box" data-aos="fade-up">
+                                <div class="icon"><i class="bi bi-basket3"></i></div>
+                                <h4 class="title"><a href="">{{ product.name }}</a></h4>
+                                <h4 class="title"><a href="">{{ product.price }} Р.</a></h4>
+                                {{ product.description|linebreaks }}
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'store:order' product.id %}"  class="about-btn1">Купить курс</a>
+                                {% else %}
+                                    <a href="" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
+                                {% endif %}
                             </div>
-                            <a href="#" data-target="#login" data-toggle="modal" class="about-btn1">Купить курс</a>
-
-
                         </div>
-                    </div>
-
-
+                    {% endfor %}
                 </div>
-
             </div>
-
         </section>
-
-
-
     </main><!-- End #main -->
-
-
-
 {% endblock content %}
 
