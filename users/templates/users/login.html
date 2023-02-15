@@ -28,7 +28,6 @@
                                         {% csrf_token %}
                                         {{ form.username }}
                                         {{ form.password }}
-
                                         <input class="btn login" type="submit" value="Войти"/>
                                         <p>Еше нет аккаунта? <a href="{% url 'users:registration' %}">Зарегестрироваться</a></p>
 

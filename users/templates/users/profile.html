@@ -14,13 +14,9 @@
             <a href=""></a>
         </h2>
         <ul>
-            <li><a href="#1"><p>Урок №1:</p> История барберинга / Основы профессии / Критерии и принципы выбора инструментов</a>
-           <li><a href="#2"><p>Урок №2:</p> Основные знания о строении волос / Строение черепа</a>
-           <li><a href="#3"><p>Урок №3:</p> Базовые навыки / Тушевка / Форма Квадрат</a>
-           <li><a href="#4"><p>Урок №4:</p> Форма треугольник / Тушевка / Разница в технике при форме треугольник</a>
-           <li><a href="#4"><p>Урок №5:</p> Форма круг / Работа с кругом / Формы лица, для которых подходит круг</a>
-
-
+            {% for lesson in lessons %}
+            <li><a href="{% url 'store:lessons' lesson.pk %}">{{lesson.name}}</a>
+            {% endfor %}
         </ul>
     <div class="mask-content"></div>
         </nav>
@@ -28,40 +24,45 @@
             <div class="container">
 
                 <div class="section-title" data-aos="fade-in" data-aos-delay="0">
-                    <h2>После окончания вы сможете:</h2>
+                    <h2>Мой профиль:</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box1" data-aos="fade-up">
-                            <div class="icon"><i class="bx bx-comment-check"></i></div>
-                            <h4 class="title"><a href="">Выполнять современные мужские стрижки</a></h4>
-                            <p class="description">Научитесь выполнять востребованные стрижки: undercut, fade, британку,
-                                side part. Сможете подобрать стрижку, учитывая стиль клиента и анатомические особенности
-                                головы;</p>
+                    <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-md-6 col-lg-4 ">
+                        <div class="icon-box2" data-aos="fade-up">
+                            {% if user.status > 0 %}
+                                <input type="checkbox"  id="nav-toggle" hidden>
+
+                                <label for="nav-toggle" class="btn login1" onclick >Начать учится! </label>
+
+                            {% else %}
+                            <div class="icon"><i class="bx bx-cart-add"></i></div>
+                            <h4 class="title"><a href="">Приобрести доступ:</a></h4>
+                            <p><input type="checkbox" id="c1" name="cc" />
+                            <label for="c1"><span></span>Пакет "Лайт"  Цена: 5000Р</label></p>
+                             <p><input type="checkbox" id="c1" name="cc" />
+                            <label for="c1"><span></span>2 тариф Цена: 10000Р</label></p>
+                           <p> <input type="checkbox" id="c1" name="cc" />
+                            <label for="c1"><span></span>3 тариф Цена :15000Р</label></p>
+                            <p><a href="{% url 'store:store' %}#price">Подробнее о тарифах</a></p>
+                            <p><input class="btn login" type="submit" value="Перейти к оплате"/></p>
+                            {% endif %}
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box1" data-aos="fade-up" data-aos-delay="100">
-                            <div class="icon"><i class="bx bx-comment-check"></i></div>
-                            <h4 class="title"><a href="">Моделировать бороду и усы</a></h4>
-                            <p class="description">Изменять черты лица с помощью грамотно подобранной формы усов и
-                                бороды;</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-                        <div class="icon-box1" data-aos="fade-up" data-aos-delay="200">
-                            <div class="icon"><i class="bx bx-comment-check"></i></div>
-                            <h4 class="title"><a href="">Составлять целостный образ для клиента</a></h4>
-                            <p class="description">Сможете выполнять тонирование волос, бороды и усов, делая образ
-                                клиента стильным.</p>
+                    <div class="col-md-6 col-lg-4 ">
+                        <div class="icon-box2" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon"><i class="bx bxs-user-account"></i></div>
+                            <h4 class="title"><a href="">Данные аккаунта</a></h4>
+                            <p class="description"> Имя пользователя: {{ form.username }}</p>
+                            <p class="description"> Email: {{ form.email }}</p>
+                            <p><a href="#">Изменить пароль</a></p>
                         </div>
                     </div>
 
 
                 </div>
-
+</div>
             </div>
         </section>
 

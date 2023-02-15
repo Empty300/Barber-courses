@@ -416,7 +416,7 @@ h6 {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 100vh;
+  height: 109.6vh;
   background: linear-gradient(rgba(128, 64, 48, 0.5), rgba(128, 64, 48, 0.0)), url("../img/main_img.jpg") top center;
   background-size: cover;
   position: relative;
@@ -747,7 +747,6 @@ section {
 }
 .services .icon-box1 {
   padding: 20px 30px 100px 30px;
-
   position: relative;
   overflow: hidden;
   background: #fff;
@@ -756,7 +755,30 @@ section {
   border-radius: 8px;
   z-index: 1;
 }
+.services .icon-box2 {
+  text-align: center;
+  padding: 20px 30px 100px 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+   height: 450px;
+}
+.services .icon-box3 {
+  text-align: center;
+  padding: 20px 30px 100px 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
 
+}
 
 .menu {
     position: fixed;
@@ -799,6 +821,7 @@ section {
   font-size: 15px;
   line-height: 28px;
   margin-bottom: 0;
+
 }
 .services .description1 {
   font-size: 0px;
@@ -1637,7 +1660,21 @@ h4 {
   justify-content: space-between;
   height: 100%;
 }
+.login1 {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: none;
+  border: 2px solid rgb(128, 64, 48);
+  color: rgb(128, 64, 48);
+  font-weight: bold;
+  transition: all .5s;
+  margin-top: 50%;
+  margin-bottom: 10px;
 
+
+
+
+}
 
 .login:hover {
   background: rgb(128, 64, 48);
@@ -2027,6 +2064,8 @@ body {
     -webkit-transition: width 0s ease;
     transition: width 0s ease;
 }
+
+
 
 /* фон затемнения на основной контент
  * при этом элементы блокируютя
