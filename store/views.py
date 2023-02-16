@@ -30,8 +30,12 @@ class LessonsDetailView(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(LessonsDetailView, self).get_context_data()
         context['all_lessons'] = Lessons.objects.all()
-
         return context
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.status > 0:
+            return super().get(request, *args, **kwargs)
+        return HttpResponseRedirect(reverse("store:store"))
 
 
 class OrderCreateView(DetailView):
@@ -70,16 +74,16 @@ def stripe_webhook_view(request):
         return HttpResponse(status=400)
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        update_after_payment(session)
+        order_id = int(session.metadata.order_id)
+        find_order(order_id)
 
     return HttpResponse(status=200)
 
 
-def update_after_payment(session):
-    order_id = int(session.metadata.order_id)
-    order = Order.objects.filter(id=order_id)
-    order.update(status=1)
-    user = User.objects.filter(id=order.first().initiator.pk)
-    user.update(status=Order.objects.get(id=order_id).product.id)
+def find_order(order_id):
+    order = Order.objects.get(id=order_id)
+    order.update_after_payment()
+
+
 
 

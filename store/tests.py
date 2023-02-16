@@ -5,6 +5,8 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils.timezone import now
 
+from store.models import Order
+from store.views import find_order
 from users.models import User, EmailVerification
 
 
@@ -20,7 +22,7 @@ class StoreTestCase(TestCase):
         }
 
     def test_list(self):
-        """Проверка наличия существующего пользователя"""
+        """Проверка работы главной страницы"""
         path = reverse('store:store')
         response = self.client.get(path)
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -32,19 +34,34 @@ class StoreTestCase(TestCase):
         response = self.client.get(reverse('store:store'))
         self.assertContains(response, 'Выйти')
 
+    def test_access(self):
+        """Проверка доступа к урокам аккаунта без оплаты"""
+
+        self.client.post(reverse('users:registration'), self.data)
+        response = self.client.get(reverse('store:lessons', args=[4]))
+        self.assertRedirects(response, reverse('store:store'))
+        self.client.login(username=self.data['username'], password=self.data['password1'])
+        response = self.client.get(reverse('store:lessons', args=[4]))
+        self.assertRedirects(response, reverse('store:store'))
 
 
-    def test_new_user(self):
-        """Создание нового пользователя"""
+    def test_access_after_payment(self):
+        """Оплата, проверка доступа, создание заказа"""
 
-        username = self.data['username']
-        self.assertFalse(User.objects.filter(username=username).exists())
-        response = self.client.post(self.path, self.data)
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        new_user = User.objects.get(username=username)
-        self.assertEqual(new_user.status, User.STANDARD)
-        self.assertEqual(new_user.email, 'testuser@example.com')
-        self.assertFalse(new_user.is_verified_email)
+        self.client.post(reverse('users:registration'), self.data)
+        user = User.objects.get(username=self.data['username'])
+        self.client.login(username=self.data['username'], password=self.data['password1'])
+        self.client.get(reverse('store:order', kwargs={'pk': 1}))
+        order = Order.objects.get(initiator=user.id)
+        find_order(order.id)
+        response = self.client.get(reverse('store:lessons', args=[4]))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, 'Урок №')
+        user = User.objects.get(username=self.data['username'])
+        self.assertEqual(user.status, 1)
+        order = Order.objects.get(initiator=user.id)
+        self.assertEqual(order.status, 1)
+
 
     def test_email_verification(self):
         """Подтверждение email для нового пользователя"""

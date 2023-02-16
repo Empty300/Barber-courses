@@ -65,6 +65,8 @@ class Order(models.Model):
     class Meta:
         verbose_name_plural = "Покупки"
 
-
-
-
+    def update_after_payment(self):
+        self.status = self.PAID
+        user = User.objects.filter(id=self.initiator.pk)
+        user.update(status=self.product.id)
+        self.save()
